@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/features/authentication/logic/cubit/signup_cubit.dart';
 import 'package:managerestaurent/features/authentication/ui/login_view.dart';
-import 'package:managerestaurent/features/profile/ui/widgets/ProfileDetailCard.dart';
+import 'package:managerestaurent/features/authentication/ui/widgets/ProfileDetailCard.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});

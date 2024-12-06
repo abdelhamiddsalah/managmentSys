@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/features/home/ui/home_view.dart';
-import 'package:managerestaurent/features/profile/ui/widgets/profile_view_body.dart';
+import 'package:managerestaurent/features/authentication/ui/widgets/profile_view_body.dart';
 
 class CurvedNavbar extends StatefulWidget {
   const CurvedNavbar({super.key});
