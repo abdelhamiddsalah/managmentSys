@@ -1,7 +1,7 @@
 // build.gradle (Project level)
 
 buildscript {
-    ext.kotlin_version = '1.7.10' // تحديد نسخة كوتلن
+    ext.kotlin_version = '1.8.10' // تحديد نسخة كوتلن
     repositories {
         google()  // استخدام مستودع جوجل
         mavenCentral()  // استخدام مستودع Maven
