@@ -4,6 +4,7 @@ import 'package:managerestaurent/core/widgets/curved_navbar.dart';
 import 'package:managerestaurent/features/authentication/ui/forgetpassword_view.dart';
 import 'package:managerestaurent/features/authentication/ui/login_view.dart';
 import 'package:managerestaurent/features/authentication/ui/signup_view.dart';
+import 'package:managerestaurent/features/home/ui/widgets/details_view_body.dart';
 import 'package:managerestaurent/features/on_boarding/ui/on_boarding_view.dart';
 
 class AppRouting {
@@ -19,15 +20,20 @@ class AppRouting {
         );
       case Routes.signupview:
         return MaterialPageRoute(
-          builder: (_) => SignupView(),
+          builder: (_) => const SignupView(),
         );
-        case Routes.onboarding:
+      case Routes.onboarding:
         return MaterialPageRoute(
-          builder: (_) => OnBoardingView(),
+          builder: (_) => const OnBoardingView(),
         );
-        case Routes.forgetpassword:
+      case Routes.forgetpassword:
         return MaterialPageRoute(
-          builder: (_) => ForgetpasswordView(),
+          builder: (_) => const ForgetpasswordView(),
+        );
+      case Routes.details:
+        final product = settings.arguments as Map<String, dynamic>;  // استخراج البيانات
+        return MaterialPageRoute(
+          builder: (_) => DetailsView(product: product), // تمرير البيانات إلى تفاصيل المنتج
         );
       default:
         return MaterialPageRoute(

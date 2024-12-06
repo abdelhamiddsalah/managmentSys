@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ProductsCubit extends Cubit<List<Map<String, dynamic>>> {
   ProductsCubit() : super([]);
 
-  // استماع لتغييرات مجموعة المنتجات
+  // استماع لتغييرات مجموعة المنتجات في Firestore
   void listenToProducts(String collectionName) {
     try {
       FirebaseFirestore.instance
@@ -19,10 +19,34 @@ class ProductsCubit extends Cubit<List<Map<String, dynamic>>> {
             ...doc.data(),
           };
         }).toList();
-        emit(items);
+        emit(items); // Emit المنتجات المستلمة
       });
     } catch (e) {
       print('Error listening to $collectionName: $e');
+      emit([]); // Emit قائمة فارغة في حال حدوث خطأ
+    }
+  }
+
+  // جلب منتج محدد بواسطة ID من Firestore
+  void getProductById(String collectionName, String productId) {
+    try {
+      FirebaseFirestore.instance
+          .collection(collectionName)
+          .doc(productId)
+          .get()
+          .then((doc) {
+        if (doc.exists) {
+          final product = {
+            'id': doc.id,
+            ...doc.data()!,
+          };
+          emit([product]); // Emit المنتج
+        } else {
+          emit([]); // إذا لم يتم العثور على المنتج
+        }
+      });
+    } catch (e) {
+      print('Error fetching product: $e');
       emit([]);
     }
   }
