@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:managerestaurent/core/theming/colors.dart';
 import 'package:managerestaurent/core/theming/styles.dart';

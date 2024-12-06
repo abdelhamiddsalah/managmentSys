@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -8,6 +10,8 @@ import 'package:managerestaurent/features/authentication/logic/cubit/signup_cubi
 import 'package:managerestaurent/features/authentication/ui/widgets/button_in_login.dart';
 
 class SignupForm extends StatelessWidget {
+  const SignupForm({super.key});
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<SignupCubit>();
