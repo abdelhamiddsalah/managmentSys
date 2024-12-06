@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 
-class DetailsView extends StatelessWidget {
-  final Map<String, dynamic> product;
-  const DetailsView({super.key, required this.product});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(product['name'] ?? 'Product Details')),
-      body: DetailsViewBody(product: product),
-    );
-  }
-}
 
 class DetailsViewBody extends StatelessWidget {
   final Map<String, dynamic> product;

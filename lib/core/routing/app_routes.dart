@@ -4,7 +4,7 @@ import 'package:managerestaurent/core/widgets/curved_navbar.dart';
 import 'package:managerestaurent/features/authentication/ui/forgetpassword_view.dart';
 import 'package:managerestaurent/features/authentication/ui/login_view.dart';
 import 'package:managerestaurent/features/authentication/ui/signup_view.dart';
-import 'package:managerestaurent/features/home/ui/widgets/details_view_body.dart';
+import 'package:managerestaurent/features/home/ui/details_view.dart';
 import 'package:managerestaurent/features/on_boarding/ui/on_boarding_view.dart';
 
 class AppRouting {
