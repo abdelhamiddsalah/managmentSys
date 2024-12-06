@@ -8,13 +8,17 @@ import 'package:managerestaurent/core/routing/app_routes.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+ await Supabase.initialize(
+    url: 'https://ysupbudasxoxequgfucm.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzdXBidWRhc3hveGVxdWdmdWNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0Njg0MDMsImV4cCI6MjA0OTA0NDQwM30.ZQm_tV9sSrlIeXJsBmjRHVEvxTr0xazp9VpcTmrIfbg',
+  );
   // Check for the token before runApp
   final initialRoute = await _getInitialRoute();
   runApp(MyApp(initialRoute: initialRoute));
