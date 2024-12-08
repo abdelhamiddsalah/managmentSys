@@ -5,4 +5,5 @@ class Routes {
   static const String onboarding='onboarding';
   static const String forgetpassword='forgetpassword';
   static const String details='details';
+   static const String cart='cart';
 }

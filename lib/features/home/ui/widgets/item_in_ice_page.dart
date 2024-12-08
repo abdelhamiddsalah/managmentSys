@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
+import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
 
 class ItemInIcePage extends StatelessWidget {
   final Map<String, dynamic> product;
@@ -49,9 +51,14 @@ class ItemInIcePage extends StatelessWidget {
                       style: Styles.discoverText,
                     ),
                     const SizedBox(height: 5),
-                    Text(
-                      '\$${product['price'] ?? '0'}',
-                      style: Styles.itemTextInIcecreamPage,
+                    InkWell(
+                      onTap: () {
+                        context.read<CartCubit>().addToCart(product);
+                      },
+                      child: Text(
+                        '\$${product['price'] ?? '0'}',
+                        style: Styles.itemTextInIcecreamPage,
+                      ),
                     ),
                   ],
                 ),

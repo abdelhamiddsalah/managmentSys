@@ -1,6 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:managerestaurent/features/cart/ui/cartView.dart';
 import 'package:managerestaurent/features/home/ui/home_view.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/profile_view_body.dart';
 import 'package:managerestaurent/features/wallet/ui/walletView.dart';
@@ -23,7 +24,7 @@ class _CurvedNavbarState extends State<CurvedNavbar> {
     // Initialize the pages
     pages = [
       HomeView(), // Home page
-      HomeView(), // Another page (customize as needed)
+      Cartview(), // Another page (customize as needed)
       Walletview(), // Another page (customize as needed)
       ProfileViewBody(), // Another page (customize as needed)
     ];

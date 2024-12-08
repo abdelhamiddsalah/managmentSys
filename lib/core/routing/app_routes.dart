@@ -4,6 +4,7 @@ import 'package:managerestaurent/core/widgets/curved_navbar.dart';
 import 'package:managerestaurent/features/authentication/ui/forgetpassword_view.dart';
 import 'package:managerestaurent/features/authentication/ui/login_view.dart';
 import 'package:managerestaurent/features/authentication/ui/signup_view.dart';
+import 'package:managerestaurent/features/cart/ui/cartView.dart';
 import 'package:managerestaurent/features/home/ui/details_view.dart';
 import 'package:managerestaurent/features/on_boarding/ui/on_boarding_view.dart';
 
@@ -34,6 +35,10 @@ class AppRouting {
         final product = settings.arguments as Map<String, dynamic>;  // استخراج البيانات
         return MaterialPageRoute(
           builder: (_) => DetailsView(product: product), // تمرير البيانات إلى تفاصيل المنتج
+        );
+        case Routes.cart:
+        return MaterialPageRoute(
+          builder: (_) => Cartview(), // تمرير البيانات إلى تفاصيل المنتج
         );
       default:
         return MaterialPageRoute(
