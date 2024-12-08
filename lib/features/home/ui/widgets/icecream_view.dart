@@ -22,7 +22,7 @@ class IcecreamView extends StatelessWidget {
               children: [
                 // العناصر المعروضة بشكل أفقي
                 SizedBox(
-                  height: 230.h,
+                  height: 240.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: products.length,
@@ -49,7 +49,7 @@ class IcecreamView extends StatelessWidget {
                     return Padding(
                       padding: const EdgeInsets.only(left: 3, right: 10, bottom: 10,top: 2),
                       child: SizedBox(
-                        height: 210.h,
+                        height: 230.h,
                         child: ItemInIcePage(product: product),
                       ),
                     );

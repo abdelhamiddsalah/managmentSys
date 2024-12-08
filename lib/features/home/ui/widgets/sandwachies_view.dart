@@ -20,7 +20,7 @@ class SandwachiesView extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 260.h,
+                  height: 280.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: products.length,
@@ -46,7 +46,7 @@ class SandwachiesView extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.only(left: 3, bottom: 10, right: 10,top: 2),
                       child: SizedBox(
-                        height: 220.w,
+                        height: 240.w,
                         child: ItemInSandwaiches(product: product),
                       ),
                     );

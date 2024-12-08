@@ -51,14 +51,17 @@ class ItemInIcePage extends StatelessWidget {
                       style: Styles.discoverText,
                     ),
                     const SizedBox(height: 5),
-                    InkWell(
-                      onTap: () {
-                        context.read<CartCubit>().addToCart(product);
-                      },
-                      child: Text(
-                        '\$${product['price'] ?? '0'}',
-                        style: Styles.itemTextInIcecreamPage,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '\$${product['price'] ?? '0'}',
+                          style: Styles.itemTextInIcecreamPage,
+                        ),
+                        IconButton(onPressed: (){
+                          context.read<CartCubit>().addToCart(product);
+                        }, icon: Icon(Icons.shopping_bag))
+                      ],
                     ),
                   ],
                 ),

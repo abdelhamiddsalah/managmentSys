@@ -20,7 +20,7 @@ class SaladsView extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 250.h,
+                  height: 280.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: products.length,
@@ -47,7 +47,7 @@ class SaladsView extends StatelessWidget {
                       return Padding(
                         padding: EdgeInsets.only(left: 3, bottom: 10, right: 10,top: 2),
                         child: SizedBox(
-                          height: 250.h,
+                          height: 270.h,
                           child: ItemInSaladPage(product: product),
                         ),
                       );

@@ -20,7 +20,7 @@ class PizzasView extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 260.h,
+                  height: 270.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: products.length,
@@ -29,7 +29,7 @@ class PizzasView extends StatelessWidget {
                       return Padding(
                         padding: EdgeInsets.only(left: 3, bottom: 10, right: 10),
                         child: SizedBox(
-                          width: 220.w,
+                          width: 230.w,
                           child: ItemInPizzaPage(product: product),
                         ),
                       );
@@ -47,7 +47,7 @@ class PizzasView extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.only(left: 3, bottom: 10, right: 10),
                       child: SizedBox(
-                        height: 240.h,
+                        height: 260.h,
                         child: ItemInPizzaPage(product: product),
                       ),
                     );

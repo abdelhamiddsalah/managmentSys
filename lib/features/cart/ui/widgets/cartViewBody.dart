@@ -11,11 +11,13 @@ class Cartviewbody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text('Cart',style: Styles.titleinloginpage,)),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text('Cart',style: Styles.titleinloginpage,)),
       body: BlocBuilder<CartCubit, List<Map<String, dynamic>>>(
         builder: (context, cart) {
           if (cart.isEmpty) {
-            return Center(child: Text('Your cart is empty'));
+            return Center(child: Text('Your cart is empty',style: Styles.titleinloginpage,));
           }
 
           return ListView.builder(
