@@ -28,7 +28,7 @@ class ProductsCubit extends Cubit<List<Map<String, dynamic>>> {
   }
 
   // جلب منتج محدد بواسطة ID من Firestore
-  void getProductById(String collectionName, String productId) {
+/*  void getProductById(String collectionName, String productId) {
     try {
       FirebaseFirestore.instance
           .collection(collectionName)
@@ -49,5 +49,5 @@ class ProductsCubit extends Cubit<List<Map<String, dynamic>>> {
       print('Error fetching product: $e');
       emit([]);
     }
-  }
+  }*/
 }
