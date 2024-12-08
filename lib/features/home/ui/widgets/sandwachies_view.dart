@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/features/home/logic/cubit/products_cubit.dart';
 import 'package:managerestaurent/features/home/ui/widgets/item_in_sandwaiches.dart';
 
@@ -10,8 +9,8 @@ class SandwachiesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: sl<ProductsCubit>()..listenToProducts('sandwachies'),
+    return BlocProvider(
+      create: (context) => ProductsCubit()..listenToProducts('sandwachies'),
       child: BlocBuilder<ProductsCubit, List<Map<String, dynamic>>>(
         builder: (context, products) {
           if (products.isEmpty) {
