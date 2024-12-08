@@ -16,7 +16,6 @@ class DetailsViewBody extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
         child: Column(
           children: [
-           // Image.network(product['image'] ?? 'default_image_url'),  // صورة المنتج
             SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/features/home/logic/cubit/products_cubit.dart';
 import 'package:managerestaurent/features/home/ui/widgets/item_in_salad_page.dart';
 
@@ -9,8 +10,8 @@ class SaladsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductsCubit()..listenToProducts('salads'),
+    return BlocProvider.value(
+       value: sl<ProductsCubit>()..listenToProducts('salads'),
       child: BlocBuilder<ProductsCubit, List<Map<String, dynamic>>>(
         builder: (context, products) {
            if (products.isEmpty) {

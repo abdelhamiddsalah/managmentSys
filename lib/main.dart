@@ -4,12 +4,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/core/routing/app_routes.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  init(); 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

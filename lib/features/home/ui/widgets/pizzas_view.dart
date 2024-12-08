@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/features/home/logic/cubit/products_cubit.dart';
 import 'package:managerestaurent/features/home/ui/widgets/item_in_pizza_page.dart';
 
@@ -9,8 +10,8 @@ class PizzasView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductsCubit()..listenToProducts('pizza'),
+    return BlocProvider.value(
+       value: sl<ProductsCubit>()..listenToProducts('pizza'),
       child: BlocBuilder<ProductsCubit, List<Map<String, dynamic>>>(
         builder: (context, products) {
            if (products.isEmpty) {
@@ -20,7 +21,7 @@ class PizzasView extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 270.h,
+                  height: 280.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: products.length,
@@ -47,7 +48,7 @@ class PizzasView extends StatelessWidget {
                     return Padding(
                       padding: EdgeInsets.only(left: 3, bottom: 10, right: 10),
                       child: SizedBox(
-                        height: 260.h,
+                        height: 270.h,
                         child: ItemInPizzaPage(product: product),
                       ),
                     );

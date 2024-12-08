@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/core/widgets/curved_navbar.dart';
 import 'package:managerestaurent/features/authentication/ui/forgetpassword_view.dart';
@@ -15,10 +16,11 @@ class AppRouting {
     switch (settings.name) {
       case Routes.homeView:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => CartCubit(),
-            child: const CurvedNavbar(),
-          ),
+        builder: (_) => BlocProvider.value(
+  value: sl<CartCubit>(), // استخدام GetIt
+  child: const CurvedNavbar(),
+),
+
         );
       case Routes.loginview:
         return MaterialPageRoute(

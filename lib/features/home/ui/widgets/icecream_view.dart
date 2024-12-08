@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/features/home/logic/cubit/products_cubit.dart';
 import 'package:managerestaurent/features/home/ui/widgets/item_in_ice_page.dart';
 
@@ -9,9 +10,9 @@ class IcecreamView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProductsCubit()..listenToProducts('iceCreams'),
-      child: BlocBuilder<ProductsCubit, List<Map<String, dynamic>>>(
+    return BlocProvider.value(
+      value: sl<ProductsCubit>()..listenToProducts('iceCreams'), // استخدام GetIt للحصول على ProductsCubit
+      child: BlocBuilder<ProductsCubit, List<Map<String, dynamic>>>( 
         builder: (context, products) {
           if (products.isEmpty) {
             return const Center(child: Text('No products available.'));
@@ -29,7 +30,7 @@ class IcecreamView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final product = products[index];
                       return Padding(
-                        padding: const EdgeInsets.only(left: 3, right: 10,bottom: 10,top: 2),
+                        padding: const EdgeInsets.only(left: 3, right: 10, bottom: 10, top: 2),
                         child: SizedBox(
                           width: 220.w,
                           child: ItemInIcePage(product: product),
@@ -39,7 +40,7 @@ class IcecreamView extends StatelessWidget {
                   ),
                 ),
 
-                 SizedBox(height: 30.h),
+                SizedBox(height: 30.h),
                 ListView.builder(
                   shrinkWrap: true, // حل مشكلة القيود
                   physics: const NeverScrollableScrollPhysics(), // منع التمرير الداخلي
@@ -47,7 +48,7 @@ class IcecreamView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final product = products[index];
                     return Padding(
-                      padding: const EdgeInsets.only(left: 3, right: 10, bottom: 10,top: 2),
+                      padding: const EdgeInsets.only(left: 3, right: 10, bottom: 10, top: 2),
                       child: SizedBox(
                         height: 230.h,
                         child: ItemInIcePage(product: product),
