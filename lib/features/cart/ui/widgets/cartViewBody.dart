@@ -19,7 +19,6 @@ class Cartviewbody extends StatelessWidget {
           if (cart.isEmpty) {
             return Center(child: Text('Your cart is empty',style: Styles.titleinloginpage,));
           }
-
           return ListView.builder(
             itemCount: cart.length,
             itemBuilder: (context, index) {

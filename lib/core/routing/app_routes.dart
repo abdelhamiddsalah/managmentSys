@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/core/widgets/curved_navbar.dart';
 import 'package:managerestaurent/features/authentication/ui/forgetpassword_view.dart';
 import 'package:managerestaurent/features/authentication/ui/login_view.dart';
 import 'package:managerestaurent/features/authentication/ui/signup_view.dart';
+import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:managerestaurent/features/cart/ui/cartView.dart';
 import 'package:managerestaurent/features/home/ui/details_view.dart';
 import 'package:managerestaurent/features/on_boarding/ui/on_boarding_view.dart';
@@ -13,7 +15,10 @@ class AppRouting {
     switch (settings.name) {
       case Routes.homeView:
         return MaterialPageRoute(
-          builder: (_) => const CurvedNavbar(),
+          builder: (_) => BlocProvider(
+            create: (context) => CartCubit(),
+            child: const CurvedNavbar(),
+          ),
         );
       case Routes.loginview:
         return MaterialPageRoute(
@@ -32,11 +37,13 @@ class AppRouting {
           builder: (_) => const ForgetpasswordView(),
         );
       case Routes.details:
-        final product = settings.arguments as Map<String, dynamic>;  // استخراج البيانات
+        final product =
+            settings.arguments as Map<String, dynamic>; // استخراج البيانات
         return MaterialPageRoute(
-          builder: (_) => DetailsView(product: product), // تمرير البيانات إلى تفاصيل المنتج
+          builder: (_) =>
+              DetailsView(product: product), // تمرير البيانات إلى تفاصيل المنتج
         );
-        case Routes.cart:
+      case Routes.cart:
         return MaterialPageRoute(
           builder: (_) => Cartview(), // تمرير البيانات إلى تفاصيل المنتج
         );
