@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/features/home/ui/home_view.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/profile_view_body.dart';
+import 'package:managerestaurent/features/wallet/ui/walletView.dart';
 
 class CurvedNavbar extends StatefulWidget {
   const CurvedNavbar({super.key});
@@ -23,7 +24,7 @@ class _CurvedNavbarState extends State<CurvedNavbar> {
     pages = [
       HomeView(), // Home page
       HomeView(), // Another page (customize as needed)
-      HomeView(), // Another page (customize as needed)
+      Walletview(), // Another page (customize as needed)
       ProfileViewBody(), // Another page (customize as needed)
     ];
   }
