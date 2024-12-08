@@ -1,4 +1,3 @@
-// ignore_for_file: deprecated_member_use
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,10 +14,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
- await Supabase.initialize(
-    url: 'https://ysupbudasxoxequgfucm.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzdXBidWRhc3hveGVxdWdmdWNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM0Njg0MDMsImV4cCI6MjA0OTA0NDQwM30.ZQm_tV9sSrlIeXJsBmjRHVEvxTr0xazp9VpcTmrIfbg',
+
+  // Supabase Initialization
+  await Supabase.initialize(
+    url: 'https://xheqqusfcxldsogcflab.supabase.co', // Replace with your Supabase URL
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoZXFxdXNmY3hsZHNvZ2NmbGFiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzM1OTE5OTUsImV4cCI6MjA0OTE2Nzk5NX0.frJQJZRftkHm4TmHm2ITqokERtYaD4L5yPYr6mN5zhc', // Replace with your Supabase key
   );
+
+  // Create a Supabase bucket if necessary
+  //await supabaseService.createBucket('names');
+
   // Check for the token before runApp
   final initialRoute = await _getInitialRoute();
   runApp(MyApp(initialRoute: initialRoute));
