@@ -24,24 +24,40 @@ class Cartviewbody extends StatelessWidget {
             itemCount: cart.length,
             itemBuilder: (context, index) {
               final product = cart[index];
-              return ListTile(
-                title: Text(product['name'] ?? 'No Name'),
-                subtitle: Text('${product['price'] ?? 0} USD'),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    context.read<CartCubit>().removeFromCart(product['id']);
-                  },
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 15),
+                child: Material(
+                  elevation: 5.0,
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(product['name'],style: Styles.titleinloginpage,),
+                            SizedBox(height: 15,),
+                            Text(product['desc'])
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Text(product['price'].toString() ,style: Styles.titleinloginpage,),
+                            SizedBox(height: 15,),
+                            IconButton(onPressed: (){
+                              context.read<CartCubit>().removeFromCart(product['id']);
+                            }, icon: Icon(Icons.delete))
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               );
             },
           );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.clear),
-        onPressed: () {
-          context.read<CartCubit>().clearCart();
         },
       ),
     );
