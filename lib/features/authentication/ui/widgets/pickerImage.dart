@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously
 
 import 'dart:io';
 
@@ -12,49 +12,46 @@ class Pickerimage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<SignupCubit>();
     return BlocConsumer<SignupCubit, SignupState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+      },
       builder: (context, state) {
         return SizedBox(
           height: 100,
           width: 100,
-          child:context.read<SignupCubit>().profilePic==null? CircleAvatar(
+          child: CircleAvatar(
             backgroundColor: Colors.grey.shade200,
-            backgroundImage: AssetImage(
-                'assets/images/png-transparent-avatar-boy-cheerful-mark-avatar-vol-2-icon.png'),
+            backgroundImage: cubit.profilePic != null
+                ? FileImage(File(cubit.profilePic!.path))
+                : AssetImage('assets/images/png-transparent-avatar-boy-cheerful-mark-avatar-vol-2-icon.png') as ImageProvider,
             child: Stack(
               children: [
                 Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: GestureDetector(
-                      onTap: () async {},
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: Colors.blue.shade400,
-                          borderRadius: BorderRadius.circular(25),
-                          border: Border.all(width: 3, color: Colors.white),
-                        ),
-                        child: GestureDetector(
-                            onTap: () {
-                              ImagePicker()
-                                  .pickImage(source: ImageSource.gallery)
-                                  .then(
-                                    (value) => context.read<SignupCubit>().uploadprofilepic(value!),
-                                  );
-                            },
-                            child: Icon(
-                              Icons.camera_alt_sharp,
-                              color: Colors.white,
-                              size: 25,
-                            )),
+                  bottom: 0,
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () async {
+                      final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+                      if (pickedFile != null) {
+                        cubit.uploadprofilepic(pickedFile);
+                      }
+                    },
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade400,
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 2, color: Colors.white),
                       ),
-                    ))
+                      child: Icon(Icons.camera_alt, color: Colors.white, size: 18),
+                    ),
+                  ),
+                ),
               ],
             ),
-          ): CircleAvatar(backgroundImage: FileImage(File(context.read<SignupCubit>().profilePic!.path)),)
+          ),
         );
       },
     );
