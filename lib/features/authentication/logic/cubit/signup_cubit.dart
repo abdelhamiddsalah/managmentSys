@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'signup_state.dart';
@@ -13,6 +14,12 @@ class SignupCubit extends Cubit<SignupState> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  XFile? profilePic;
+
+  uploadprofilepic(XFile image){
+    profilePic=image;
+    emit(uploasProfilepic());
+  }
 
   Future<void> signup() async {
     if (formKey.currentState?.validate() ?? false) {

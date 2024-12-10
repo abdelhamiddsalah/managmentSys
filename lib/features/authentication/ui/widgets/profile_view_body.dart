@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/features/authentication/logic/cubit/signup_cubit.dart';
 import 'package:managerestaurent/features/authentication/ui/login_view.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/ProfileDetailCard.dart';
+import 'package:managerestaurent/features/authentication/ui/widgets/pickerImage.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({super.key});
@@ -20,12 +21,10 @@ class ProfileViewBody extends StatelessWidget {
 
           String userName = 'No Name';
           String userEmail = 'No Email';
-          String? userPhoto;
 
           if (state is SignupSuccess) {
             userName = state.user.displayName ?? 'No Name';
             userEmail = state.user.email ?? 'No Email';
-            userPhoto = state.user.photoURL;
           }
 
           return Scaffold(
@@ -49,29 +48,9 @@ class ProfileViewBody extends StatelessWidget {
                       Align(
                         alignment: Alignment.center,
                         child: Padding(
-                          padding: EdgeInsets.only(top: 100.h),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(60),
-                            elevation: 5,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(60),
-                              child: userPhoto != null
-                                  ? Image.network(
-                                      userPhoto,
-                                      width: 100.w,
-                                      height: 100.h,
-                                      fit: BoxFit.cover,
-                                    )
-                                  : Image.asset(
-                                      'assets/images/boy.jpg',
-                                      width: 100.w,
-                                      height: 100.h,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
-                          ),
-                        ),
-                      ),
+                          padding: const EdgeInsets.only(top: 100),
+                          child: Pickerimage(),
+                        )),
                       Padding(
                         padding: EdgeInsets.only(top: 40.h),
                         child: Row(
