@@ -6,7 +6,7 @@ import 'package:managerestaurent/features/authentication/ui/widgets/login_backgr
 import 'package:managerestaurent/features/authentication/ui/widgets/login_form.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/logo_widget.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/row_in_last_login.dart';
-import 'package:managerestaurent/features/authentication/logic/cubit/login_cubit.dart';
+import 'package:managerestaurent/features/authentication/logic/loginCubit/login_cubit.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 
 class LoginViewBody extends StatelessWidget {

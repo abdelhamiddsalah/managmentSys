@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
-import 'package:managerestaurent/features/authentication/logic/cubit/signup_cubit.dart';
+import 'package:managerestaurent/features/authentication/logic/signupCubit/signup_cubit.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/_SignupForm.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/login_background.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/row_in_last_login.dart';

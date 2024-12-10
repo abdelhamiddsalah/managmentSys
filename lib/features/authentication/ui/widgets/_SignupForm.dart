@@ -6,7 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
-import 'package:managerestaurent/features/authentication/logic/cubit/signup_cubit.dart';
+import 'package:managerestaurent/features/authentication/logic/signupCubit/signup_cubit.dart';
 import 'package:managerestaurent/features/authentication/ui/widgets/button_in_login.dart';
 
 class SignupForm extends StatelessWidget {

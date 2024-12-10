@@ -70,6 +70,7 @@ class SignupCubit extends Cubit<SignupState> {
     }
   }
 
+///////////////////////////////////////////////////////////////////////
   Future<void> loadUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? idToken = prefs.getString('id_token');
@@ -85,6 +86,7 @@ class SignupCubit extends Cubit<SignupState> {
       emit(SignupFailure('No token found.'));
     }
   }
+///////////////////////////////////////////////////////////////////////
 
   Future<void> logout() async {
     try {

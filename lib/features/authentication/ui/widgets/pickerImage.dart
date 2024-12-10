@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:managerestaurent/features/authentication/logic/cubit/signup_cubit.dart';
+import 'package:managerestaurent/features/authentication/logic/signupCubit/signup_cubit.dart';
 
 class Pickerimage extends StatelessWidget {
   const Pickerimage({super.key});

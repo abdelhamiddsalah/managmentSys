@@ -26,7 +26,6 @@ class LoginCubit extends Cubit<LoginState> {
         // تخزين الـ ID Token في SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('id_token', idToken ?? '');
-
         emit(LoginSuccess(user: credential.user!)); // حالة النجاح
       } on FirebaseAuthException catch (e) {
         emit(LoginError(message: e.message ?? 'An error occurred')); // حالة الخطأ

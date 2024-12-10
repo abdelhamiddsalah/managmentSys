@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:managerestaurent/features/authentication/logic/cubit/login_cubit.dart';
+import 'package:managerestaurent/features/authentication/logic/loginCubit/login_cubit.dart';
 
 class ButtonInForget extends StatelessWidget {
   const ButtonInForget({super.key});
