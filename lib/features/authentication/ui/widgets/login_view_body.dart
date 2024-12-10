@@ -28,8 +28,7 @@ class LoginViewBody extends StatelessWidget {
                 }
                 if (state is LoginSuccess) { // Dismiss loading on success
                   Navigator.pushReplacementNamed(context, Routes.homeView);
-                } else if (state is LoginError) {
-                  
+                } else if (state is LoginError) { 
                  // EasyLoading.show(status: state.message); // Dismiss loading on error  
                   EasyLoading.dismiss();
                 }

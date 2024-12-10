@@ -17,7 +17,6 @@ class ButtonInForget extends StatelessWidget {
             child: const CircularProgressIndicator(color: Colors.white),
           );
         }
-
         return Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -26,8 +25,7 @@ class ButtonInForget extends StatelessWidget {
           ),
           child: MaterialButton(
             onPressed: () async {
-              await context.read<LoginCubit>().sendPasswordResetEmail();
-              
+              await context.read<LoginCubit>().sendPasswordResetEmail();   
             },
             child: Text(
               'Send Email',
