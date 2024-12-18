@@ -19,18 +19,21 @@ class DetailsViewBody extends StatelessWidget {
           children: [
             // صورة المنتج
             Center(
-              child: Image.network(
-                product.imageUrl,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(child: CircularProgressIndicator());
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(Icons.error, size: 100);
-                },
+              child: Hero(
+                tag: product.id,
+                child: Image.network(
+                  product.imageUrl,
+                  height: 200,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.error, size: 100);
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 20),
