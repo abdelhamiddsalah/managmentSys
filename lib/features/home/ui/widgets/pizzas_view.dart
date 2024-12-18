@@ -19,7 +19,6 @@ class PizzasView extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                buildHorizontalList(products),
                 SizedBox(height: 30.h),
                 buildVerticalList(products),
               ],
@@ -30,41 +29,49 @@ class PizzasView extends StatelessWidget {
     );
   }
 
-  Widget buildHorizontalList(List<Map<String, dynamic>> products) {
-    return SizedBox(
-      height: 280.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          final product = products[index];
-          return Padding(
-            padding: EdgeInsets.only(left: 3, bottom: 10, right: 10),
-            child: SizedBox(
-              width: 230.w,
-              child: ItemInPizzaPage(product: product),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
   Widget buildVerticalList(List<Map<String, dynamic>> products) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: products.length,
-      itemBuilder: (context, index) {
-        final product = products[index];
-        return Padding(
-          padding: EdgeInsets.only(left: 3, bottom: 10, right: 10),
-          child: SizedBox(
-            height: 270.h,
-            child: ItemInPizzaPage(product: product),
-          ),
-        );
-      },
-    );
+    return   ListView.builder(
+                  shrinkWrap: true, // Solves unbounded height issue
+                  physics: const NeverScrollableScrollPhysics(), // Prevents internal scroll
+                  itemCount: (products.length / 2).ceil(), // Show rows of two items
+                  itemBuilder: (context, index) {
+                    int firstItemIndex = index * 2;
+                    int secondItemIndex = firstItemIndex + 1;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // First item
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 300.h, // Set a consistent height
+                              child: ItemInPizzaPage(product: products[firstItemIndex]),
+                            ),
+                          ),
+                        ),
+                        // Second item (check to avoid overflow)
+                        if (secondItemIndex < products.length)
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: 310.h, // Set the same consistent height
+                                child: ItemInPizzaPage(product: products[secondItemIndex]),
+                              ),
+                            ),
+                          ),
+                        // Spacer for alignment if only one item in the row
+                        if (secondItemIndex >= products.length)
+                          Expanded(
+                            child: SizedBox(
+                              height: 280.h, // Maintain row height even if empty
+                              child: const SizedBox(),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                );
   }
 }
