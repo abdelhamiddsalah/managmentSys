@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/features/home/models/product.dart';
 
@@ -23,7 +24,7 @@ class DetailsViewBody extends StatelessWidget {
                 tag: product.id,
                 child: Image.network(
                   product.imageUrl,
-                  height: 200,
+                  height: 200.h,
                   width: double.infinity,
                   fit: BoxFit.cover,
                   loadingBuilder: (context, child, loadingProgress) {
@@ -67,7 +68,7 @@ class DetailsViewBody extends StatelessWidget {
             Row(
               children: [
                 const Icon(Icons.watch_later_outlined, size: 20),
-                const SizedBox(width: 10),
+                 SizedBox(width: 10.w),
                 Text(
                   'Delivery Time: 30 min',
                   style: Styles.discoverText,
