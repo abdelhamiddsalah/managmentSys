@@ -1,7 +1,19 @@
+import 'package:hive/hive.dart';
+
+part 'product.g.dart'; // تأكد من إضافة هذا الجزء للملف
+
+@HiveType(typeId: 1) // تأكد من استخدام نوع معرف مميز
 class Product {
+  @HiveField(0)
   final String id;
+  
+  @HiveField(1)
   final String name;
+  
+  @HiveField(2)
   final String desc;
+  
+  @HiveField(3)
   final int price;
 
   Product({
@@ -11,24 +23,22 @@ class Product {
     required this.price,
   });
 
-  // إنشاء دالة لتحويل بيانات Firebase إلى Product
   factory Product.fromFirestore(String id, Map<String, dynamic> data) {
     return Product(
       id: id,
       name: data['name'] ?? 'No Name',
       desc: data['desc'] ?? 'No Description',
-      price: _parsePrice(data['price']), // تحويل السعر بشكل آمن
+      price: _parsePrice(data['price']),
     );
   }
 
-  // دالة مساعدة لتحويل السعر إلى int
   static int _parsePrice(dynamic price) {
     if (price is int) {
       return price;
     } else if (price is String) {
-      return int.tryParse(price) ?? 0; // في حال كانت القيمة String، نحاول تحويلها إلى int وإذا فشلنا نستخدم 0
+      return int.tryParse(price) ?? 0;
     } else {
-      return 0; // في حال كانت القيمة null أو نوع آخر
+      return 0;
     }
   }
 
