@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
+import 'package:managerestaurent/features/wallet/logic/stripe_function.dart';
 import 'package:managerestaurent/features/wallet/ui/widgets/wallet_add_options.dart';
 import 'package:managerestaurent/features/wallet/ui/widgets/wallet_card.dart';
 import 'package:managerestaurent/features/wallet/ui/widgets/wallet_header.dart';
@@ -45,10 +46,15 @@ class _AddMoneyButton extends StatelessWidget {
         color: const Color(0xff00B0B0),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Center(
-        child: Text(
-          'Add Money',
-          style: Styles.titleinforget,
+      child: GestureDetector(
+        onTap: () {
+          PaymentFunction.managepayment(120, 'USD');
+        },
+        child: Center(
+          child: Text(
+            'Add Money',
+            style: Styles.titleinforget,
+          ),
         ),
       ),
     );

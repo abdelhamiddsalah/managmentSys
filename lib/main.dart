@@ -2,8 +2,10 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/core/routing/app_routes.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
@@ -13,6 +15,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   init(); 
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(); // تحميل البيئة من ملف .env
+  if (dotenv.env.containsKey('PUBLISHER_KEY')) {
+    debugPrint("Environment loaded successfully!");
+  } else {
+    debugPrint("Failed to load environment.");
+  }
+  Stripe.publishableKey = dotenv.env['PUBLISHER_KEY'] ?? 'default_key'; // تعيين مفتاح النشر من البيئة
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
