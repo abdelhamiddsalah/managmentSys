@@ -38,6 +38,7 @@ class CartCubit extends Cubit<List<Product>> {
   }
 
   // إغلاق صندوق Hive عند الانتهاء
+  @override
   Future<void> close() async {
     await _cartBox.close();
     super.close();
