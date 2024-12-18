@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
 
 class ItemInPizzaPage extends StatelessWidget {
   const ItemInPizzaPage({super.key, required this.product});
-final Map<String, dynamic> product;
+final Product product;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -41,12 +42,12 @@ final Map<String, dynamic> product;
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product['name'] ?? 'Unknown Product',
+                      product.name,
                       style: Styles.itemTextInIcecreamPage,
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      product['desc'] ?? 'No description available',
+                      product.desc,
                       style: Styles.discoverText,
                     ),
                     const SizedBox(height: 5),
@@ -54,7 +55,7 @@ final Map<String, dynamic> product;
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${product['price'] ?? '0'}',
+                          '\$${product.price}',
                           style: Styles.itemTextInIcecreamPage,
                         ),
                         IconButton(onPressed: (){

@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
 
 class ItemInSandwaiches extends StatelessWidget {
-  final Map<String, dynamic> product;
+  final Product product;
 
   const ItemInSandwaiches({super.key, required this.product});
 
@@ -43,12 +44,12 @@ class ItemInSandwaiches extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product['name'] ?? 'Unknown Product',
+                      product.name,
                       style: Styles.itemTextInIcecreamPage,
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      product['desc'] ?? 'No description available',
+                      product.desc,
                       style: Styles.discoverText,
                     ),
                     const SizedBox(height: 5),
@@ -56,7 +57,7 @@ class ItemInSandwaiches extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          '\$${product['price'] ?? '0'}',
+                          '\$${product.price}',
                           style: Styles.itemTextInIcecreamPage,
                         ),
                         IconButton(onPressed: (){

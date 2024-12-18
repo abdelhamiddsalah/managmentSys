@@ -15,6 +15,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() async {
   init(); 
   WidgetsFlutterBinding.ensureInitialized();
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Check for the token before runApp
+  final initialRoute = await _getInitialRoute();
   await dotenv.load(); // تحميل البيئة من ملف .env
   if (dotenv.env.containsKey('PUBLISHER_KEY')) {
     debugPrint("Environment loaded successfully!");
@@ -22,11 +28,6 @@ void main() async {
     debugPrint("Failed to load environment.");
   }
   Stripe.publishableKey = dotenv.env['PUBLISHER_KEY'] ?? 'default_key'; // تعيين مفتاح النشر من البيئة
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  // Check for the token before runApp
-  final initialRoute = await _getInitialRoute();
   runApp(MyApp(initialRoute: initialRoute));
   configLoading();
 }

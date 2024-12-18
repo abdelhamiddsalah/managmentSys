@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
-import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
 
 class ItemInIcePage extends StatelessWidget {
-  final Map<String, dynamic> product;
+  final Product product;
+
   const ItemInIcePage({super.key, required this.product});
 
   @override
@@ -14,8 +15,8 @@ class ItemInIcePage extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          Routes.details,
-          arguments: product,  // تمرير المنتج إلى صفحة التفاصيل
+          '/details', // تحديد اسم الصفحة المناسبة
+          arguments: product, // تمرير المنتج إلى صفحة التفاصيل
         );
       },
       child: Material(
@@ -30,41 +31,34 @@ class ItemInIcePage extends StatelessWidget {
             children: [
               Center(
                 child: Image.asset(
-                  'assets/images/8e7d6a3367963f091011dad53454fad3.jpg',  // صورة المنتج
+                  'assets/images/ice-cream.png', // صورة المنتج
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(height: 5),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product['name'] ?? 'Unknown Product',
-                      style: Styles.itemTextInIcecreamPage,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      product['desc'] ?? 'No description available',
-                      style: Styles.discoverText,
-                    ),
-                    const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '\$${product['price'] ?? '0'}',
-                          style: Styles.itemTextInIcecreamPage,
-                        ),
-                        IconButton(onPressed: (){
+              Text(
+                product.name,
+                style: Styles.itemTextInIcecreamPage,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                product.desc,
+                 style: Styles.discoverText,
+              ),
+              const SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '\$${product.price}',
+                   style: Styles.itemTextInIcecreamPage,
+                  ),
+                   IconButton(onPressed: (){
                           context.read<CartCubit>().addToCart(product);
                         }, icon: Icon(Icons.shopping_bag))
-                      ],
-                    ),
-                  ],
-                ),
+                ],
               ),
             ],
           ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
 
 class Cartviewbody extends StatelessWidget {
   const Cartviewbody({super.key});
@@ -14,7 +15,7 @@ class Cartviewbody extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text('Cart',style: Styles.titleinloginpage,)),
-      body: BlocBuilder<CartCubit, List<Map<String, dynamic>>>(
+      body: BlocBuilder<CartCubit, List<Product>>(
         builder: (context, cart) {
           if (cart.isEmpty) {
             return Center(child: Text('Your cart is empty',style: Styles.titleinloginpage,));
@@ -36,17 +37,17 @@ class Cartviewbody extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(product['name'],style: Styles.titleinloginpage,),
+                            Text(product.name,style: Styles.titleinloginpage,),
                             SizedBox(height: 15,),
-                            Text(product['desc'])
+                            Text(product.desc)
                           ],
                         ),
                         Column(
                           children: [
-                            Text(product['price'].toString() ,style: Styles.titleinloginpage,),
+                            Text(product.price.toString() ,style: Styles.titleinloginpage,),
                             SizedBox(height: 15,),
                             IconButton(onPressed: (){
-                              context.read<CartCubit>().removeFromCart(product['id']);
+                              context.read<CartCubit>().removeFromCart(product.id);
                             }, icon: Icon(Icons.delete))
                           ],
                         ),
