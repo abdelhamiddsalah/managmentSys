@@ -15,7 +15,7 @@ class ItemInIcePage extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          '/details', // تحديد اسم الصفحة المناسبة
+          'details', // تحديد اسم الصفحة المناسبة
           arguments: product, // تمرير المنتج إلى صفحة التفاصيل
         );
       },
@@ -30,11 +30,21 @@ class ItemInIcePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Image.asset(
-                  'assets/images/ice-cream.png', // صورة المنتج
+                child: Image.network(
+                  product.imageUrl, // استخدام الصورة المجلوبة من Supabase
                   height: 100,
                   width: 100,
                   fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return Icon(Icons.error); // أيقونة خطأ إذا فشل التحميل
+                  },
                 ),
               ),
               const SizedBox(height: 5),

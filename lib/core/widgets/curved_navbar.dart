@@ -23,7 +23,7 @@ class _CurvedNavbarState extends State<CurvedNavbar> {
     super.initState();
     // Initialize the pages
     pages = [
-      HomeView(), // Home page
+  HomeView(),
       Cartview(), // Another page (customize as needed)
       Walletview(), // Another page (customize as needed)
       ProfileViewBody(), // Another page (customize as needed)

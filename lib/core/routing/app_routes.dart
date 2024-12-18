@@ -8,6 +8,7 @@ import 'package:managerestaurent/features/authentication/ui/login_view.dart';
 import 'package:managerestaurent/features/authentication/ui/signup_view.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:managerestaurent/features/cart/ui/cartView.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
 import 'package:managerestaurent/features/home/ui/details_view.dart';
 import 'package:managerestaurent/features/on_boarding/ui/on_boarding_view.dart';
 
@@ -40,7 +41,7 @@ class AppRouting {
         );
       case Routes.details:
         final product =
-            settings.arguments as Map<String, dynamic>; // استخراج البيانات
+            settings.arguments as Product; // استخراج البيانات
         return MaterialPageRoute(
           builder: (_) =>
               DetailsView(product: product), // تمرير البيانات إلى تفاصيل المنتج

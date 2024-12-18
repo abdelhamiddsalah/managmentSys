@@ -1,41 +1,4 @@
-/*import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:managerestaurent/features/home/logic/cubit/products_state.dart';
-import 'package:managerestaurent/features/home/models/product.dart';
-
-class ProductsCubit extends Cubit<ProductsState> {
-  ProductsCubit() : super(ProductsInitial());
-
-  void listenToProducts(String collectionName) {
-    emit(ProductsLoading()); // بدء التحميل
-
-    try {
-      FirebaseFirestore.instance
-          .collection(collectionName)
-          .snapshots()
-          .listen((querySnapshot) {
-        final products = querySnapshot.docs.map((doc) {
-          return Product.fromFirestore(doc.id, doc.data());
-        }).toList();
-
-        print('Fetched products: $products');  // سجل البيانات المسترجعة
-
-        if (products.isEmpty) {
-          emit(ProductsError('No products found.'));
-        } else {
-          emit(ProductsLoaded(products)); // نجاح في التحميل
-        }
-      }, onError: (error) {
-        emit(ProductsError('Error fetching products: $error')); // معالجة الخطأ
-      });
-    } catch (e) {
-      emit(ProductsError('Exception in listenToProducts: $e'));
-    }
-  }
-}
-*/
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+/*import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bloc/bloc.dart';
 import 'package:managerestaurent/features/home/logic/cubit/products_state.dart';
 import 'package:managerestaurent/features/home/models/product.dart';
@@ -44,8 +7,7 @@ class ProductsCubit extends Cubit<ProductsState> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   ProductsCubit() : super(ProductsInitial());
-
-  // جلب البيانات من Firestore
+  
   Future<void> fetchProducts(String collectionName) async {
     try {
       emit(ProductsLoading());  // إعادة تعيين الحالة إلى البداية
@@ -56,6 +18,67 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsLoaded(products));  // تحديث الحالة عند نجاح الجلب
     } catch (e) {
       emit(ProductsError(e.toString()));  // تحديث الحالة عند حدوث خطأ
+    }
+  }
+}*/
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:managerestaurent/features/home/logic/cubit/products_state.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+class ProductsCubit extends Cubit<ProductsState> {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  ProductsCubit() : super(ProductsInitial());
+
+  Future<void> fetchProducts(String collectionName) async {
+    try {
+      emit(ProductsLoading());
+
+      // جلب المنتجات من Firestore
+      QuerySnapshot snapshot = await _firestore.collection(collectionName).get();
+      List<Product> products = snapshot.docs
+          .map((doc) => Product.fromFirestore(
+              doc.id,
+              doc.data() as Map<String, dynamic>)) // يتم تعيين صورة مؤقتة
+          .toList();
+
+      // جلب الصور من Supabase
+      final response = await Supabase.instance.client.storage
+          .from('foods_images')
+          .list();
+
+      if (response.isEmpty) {
+        debugPrint('No files found in the bucket.');
+      } else {
+        final imageUrls = response.map((file) {
+          final url = Supabase.instance.client.storage
+              .from('foods_images')
+              .getPublicUrl(file.name);
+
+          if (url.contains('.emptyFolderPlaceholder') || url.isEmpty) {
+            return null;
+          }
+          return url;
+        }).where((url) => url != null).toList();
+
+        // ربط الصور بالمنتجات
+        for (int i = 0; i < products.length && i < imageUrls.length; i++) {
+          products[i] = Product(
+            id: products[i].id,
+            name: products[i].name,
+            desc: products[i].desc,
+            price: products[i].price,
+            imageUrl: imageUrls[i]!,
+          );
+        }
+      }
+
+      emit(ProductsLoaded(products));
+    } catch (e) {
+      emit(ProductsError(e.toString()));
     }
   }
 }

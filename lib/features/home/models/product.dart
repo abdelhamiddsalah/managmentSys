@@ -1,8 +1,7 @@
 import 'package:hive/hive.dart';
 
-part 'product.g.dart'; // تأكد من إضافة هذا الجزء للملف
-
-@HiveType(typeId: 1) // تأكد من استخدام نوع معرف مميز
+part 'product.g.dart';
+@HiveType(typeId: 1)
 class Product {
   @HiveField(0)
   final String id;
@@ -16,11 +15,15 @@ class Product {
   @HiveField(3)
   final int price;
 
+  @HiveField(4)
+  final String imageUrl; // حقل جديد لرابط الصورة
+
   Product({
     required this.id,
     required this.name,
     required this.desc,
     required this.price,
+    required this.imageUrl, // أضف الصورة إلى المُنشئ
   });
 
   factory Product.fromFirestore(String id, Map<String, dynamic> data) {
@@ -29,6 +32,7 @@ class Product {
       name: data['name'] ?? 'No Name',
       desc: data['desc'] ?? 'No Description',
       price: _parsePrice(data['price']),
+      imageUrl: data['imageUrl'] ?? '', // جلب رابط الصورة
     );
   }
 
@@ -47,6 +51,7 @@ class Product {
       'name': name,
       'desc': desc,
       'price': price,
+      'imageUrl': imageUrl, // أضف رابط الصورة إلى الخريطة
     };
   }
 }
