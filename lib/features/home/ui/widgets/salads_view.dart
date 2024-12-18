@@ -20,39 +20,50 @@ class SaladsView extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 280.h,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return Padding(
-                        padding: EdgeInsets.only(left: 3, bottom: 10, right: 10,top: 2),
-                        child: SizedBox(
-                          width: 220.w,
-                          child: ItemInSaladPage(product: product),
+                  child:  ListView.builder(
+                  shrinkWrap: true, // Solves unbounded height issue
+                  physics: const NeverScrollableScrollPhysics(), // Prevents internal scroll
+                  itemCount: (products.length / 2).ceil(), // Show rows of two items
+                  itemBuilder: (context, index) {
+                    int firstItemIndex = index * 2;
+                    int secondItemIndex = firstItemIndex + 1;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // First item
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 290.h, // Set a consistent height
+                              child: ItemInSaladPage(product: products[firstItemIndex]),
+                            ),
+                          ),
                         ),
-                      );
-                    },
-                  ),
-                  
-                ),
-                SizedBox(height: 30.h,),
-                ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return Padding(
-                        padding: EdgeInsets.only(left: 3, bottom: 10, right: 10,top: 2),
-                        child: SizedBox(
-                          height: 270.h,
-                          child: ItemInSaladPage(product: product),
-                        ),
-                      );
-                    },
-                  ),
+                        // Second item (check to avoid overflow)
+                        if (secondItemIndex < products.length)
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                height: 300.h, // Set the same consistent height
+                                child: ItemInSaladPage(product: products[secondItemIndex]),
+                              ),
+                            ),
+                          ),
+                        // Spacer for alignment if only one item in the row
+                        if (secondItemIndex >= products.length)
+                          Expanded(
+                            child: SizedBox(
+                              height: 280.h, // Maintain row height even if empty
+                              child: const SizedBox(),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
+                )
+                )
               ],
             ),
           );
