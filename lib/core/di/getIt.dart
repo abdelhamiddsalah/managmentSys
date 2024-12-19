@@ -1,10 +1,16 @@
 // ignore_for_file: file_names
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
-final sl = GetIt.instance; // sl = Service Locator
+import 'package:managerestaurent/features/home/logic/cubit/products_cubit.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void init() {
-  // Example: Registering a Cubit
-  sl.registerLazySingleton<CartCubit>(() => CartCubit());
+final GetIt locator = GetIt.instance;
+
+void setupLocator() {
+  // تسجيل FirebaseFirestore
+  locator.registerLazySingleton<FirebaseFirestore>(() => FirebaseFirestore.instance);
+  locator.registerLazySingleton<SupabaseClient>(() => Supabase.instance.client,);
+  locator.registerSingleton<CartCubit>(CartCubit());
+   locator.registerFactory<ProductsCubit>(() => ProductsCubit());
 }

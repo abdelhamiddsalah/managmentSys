@@ -1,29 +1,30 @@
 import 'package:hive/hive.dart';
 
 part 'product.g.dart';
+
 @HiveType(typeId: 1)
 class Product {
   @HiveField(0)
   final String id;
-  
+
   @HiveField(1)
   final String name;
-  
+
   @HiveField(2)
   final String desc;
-  
+
   @HiveField(3)
   final int price;
 
   @HiveField(4)
-  final String imageUrl; // حقل جديد لرابط الصورة
+  final String imageUrl;
 
   Product({
     required this.id,
     required this.name,
     required this.desc,
     required this.price,
-    required this.imageUrl, // أضف الصورة إلى المُنشئ
+    required this.imageUrl,
   });
 
   factory Product.fromFirestore(String id, Map<String, dynamic> data) {
@@ -32,7 +33,7 @@ class Product {
       name: data['name'] ?? 'No Name',
       desc: data['desc'] ?? 'No Description',
       price: _parsePrice(data['price']),
-      imageUrl: data['imageUrl'] ?? '', // جلب رابط الصورة
+      imageUrl: data['imageUrl'] ?? '',
     );
   }
 
@@ -48,10 +49,28 @@ class Product {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'desc': desc,
       'price': price,
-      'imageUrl': imageUrl, // أضف رابط الصورة إلى الخريطة
+      'imageUrl': imageUrl,
     };
+  }
+
+  // Add the copyWith method
+  Product copyWith({
+    String? id,
+    String? name,
+    String? desc,
+    int? price,
+    String? imageUrl,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      desc: desc ?? this.desc,
+      price: price ?? this.price,
+      imageUrl: imageUrl ?? this.imageUrl,
+    );
   }
 }

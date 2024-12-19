@@ -7,10 +7,9 @@ class CartCubit extends Cubit<List<Product>> {
     _loadCart();
   }
 
-  // صندوق Hive لتخزين السلة
   late Box<Product> _cartBox;
 
-  // تحميل السلة من Hive عند بدء تطبيق CartCubit
+  // تحميل السلة من Hive
   Future<void> _loadCart() async {
     _cartBox = await Hive.openBox<Product>('cart');
     emit(_cartBox.values.toList());
@@ -18,26 +17,26 @@ class CartCubit extends Cubit<List<Product>> {
 
   // إضافة عنصر إلى السلة
   void addToCart(Product product) {
-    _cartBox.add(product); // إضافة المنتج إلى صندوق Hive
-    emit(_cartBox.values.toList()); // تحديث الحالة
+    _cartBox.add(product);
+    emit(_cartBox.values.toList());
   }
 
   // إزالة عنصر من السلة
   void removeFromCart(String productId) {
     final index = _cartBox.values.toList().indexWhere((product) => product.id == productId);
     if (index != -1) {
-      _cartBox.deleteAt(index); // حذف المنتج من صندوق Hive
+      _cartBox.deleteAt(index);
     }
-    emit(_cartBox.values.toList()); // تحديث الحالة
+    emit(_cartBox.values.toList());
   }
 
   // مسح السلة
   void clearCart() {
-    _cartBox.clear(); // مسح كافة العناصر من صندوق Hive
-    emit([]); // تحديث الحالة إلى سلة فارغة
+    _cartBox.clear();
+    emit([]);
   }
 
-  // إغلاق صندوق Hive عند الانتهاء
+  // إغلاق الصندوق عند انتهاء الكيوبت
   @override
   Future<void> close() async {
     await _cartBox.close();

@@ -17,11 +17,10 @@ class AppRouting {
     switch (settings.name) {
       case Routes.homeView:
         return MaterialPageRoute(
-        builder: (_) => BlocProvider.value(
-  value: sl<CartCubit>(), // استخدام GetIt
-  child: const CurvedNavbar(),
-),
-
+          builder: (_) => BlocProvider(
+            create: (context) => locator<CartCubit>(),
+            child: const CurvedNavbar(),
+          ),
         );
       case Routes.loginview:
         return MaterialPageRoute(
@@ -40,8 +39,7 @@ class AppRouting {
           builder: (_) => const ForgetpasswordView(),
         );
       case Routes.details:
-        final product =
-            settings.arguments as Product; // استخراج البيانات
+        final product = settings.arguments as Product; // استخراج البيانات
         return MaterialPageRoute(
           builder: (_) =>
               DetailsView(product: product), // تمرير البيانات إلى تفاصيل المنتج
