@@ -12,7 +12,7 @@ class SandwachiesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsCubit()..fetchProducts('sandwachies'),
+      create: (context) => ProductsCubit()..fetchProducts('sandwachies', 'sandwachies'),
       child: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
@@ -45,7 +45,7 @@ class SandwachiesView extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 290.h,
+                  height: 260.h,
                   child: ItemInSandwaiches(product: products[firstItemIndex]),
                 ),
               ),
@@ -55,7 +55,7 @@ class SandwachiesView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                    height: 310.h,
+                    height: 270.h,
                     child: ItemInSandwaiches(product: products[secondItemIndex]),
                   ),
                 ),

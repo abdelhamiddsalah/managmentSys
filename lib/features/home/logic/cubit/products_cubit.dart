@@ -33,7 +33,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   ProductsCubit() : super(ProductsInitial());
 
-  Future<void> fetchProducts(String collectionName) async {
+  Future<void> fetchProducts(String collectionName , String bucketName) async {
     try {
       emit(ProductsLoading());
 
@@ -47,7 +47,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
       // جلب الصور من Supabase
       final response = await Supabase.instance.client.storage
-          .from('foods_images')
+          .from(bucketName)
           .list();
 
       if (response.isEmpty) {
@@ -55,7 +55,7 @@ class ProductsCubit extends Cubit<ProductsState> {
       } else {
         final imageUrls = response.map((file) {
           final url = Supabase.instance.client.storage
-              .from('foods_images')
+              .from(bucketName)
               .getPublicUrl(file.name);
 
           if (url.contains('.emptyFolderPlaceholder') || url.isEmpty) {

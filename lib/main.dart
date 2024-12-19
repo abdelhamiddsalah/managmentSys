@@ -22,8 +22,7 @@ void main() async {
   init(); 
   WidgetsFlutterBinding.ensureInitialized();
     await Supabase.initialize(url: 'https://xheqqusfcxldsogcflab.supabase.co', anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoZXFxdXNmY3hsZHNvZ2NmbGFiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczMzU5MTk5NSwiZXhwIjoyMDQ5MTY3OTk1fQ.F-T9v9FCwqTD5U9uAK8hhbOmrCcrwFeG3z034VtLpCM');
-  //await Subabase().initSupabase();
-  //await Subabase().createBucket('imagess');
+    
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

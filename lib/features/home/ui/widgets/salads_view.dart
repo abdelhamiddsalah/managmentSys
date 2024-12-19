@@ -12,7 +12,7 @@ class SaladsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsCubit()..fetchProducts('salads'),
+      create: (context) => ProductsCubit()..fetchProducts('salads', 'foods_images'),
       child: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
@@ -45,7 +45,7 @@ class SaladsView extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  height: 280.h,
+                  height: 230.h,
                   child: ItemInSaladPage(product: products[firstItemIndex]),
                 ),
               ),
@@ -55,7 +55,7 @@ class SaladsView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                    height: 290.h,
+                    height: 250.h,
                     child: ItemInSaladPage(product: products[secondItemIndex]),
                   ),
                 ),

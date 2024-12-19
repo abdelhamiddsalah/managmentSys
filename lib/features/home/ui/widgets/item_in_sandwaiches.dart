@@ -31,12 +31,22 @@ class ItemInSandwaiches extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Image.asset(
-                  'assets/images/salad4.png',
-                  height: 140,
-                  width: 140,
-                  fit: BoxFit.cover,
-                ),
+                child: Image.network(
+                    product.imageUrl, // استخدام الصورة المجلوبة من Supabase
+                    height: 100,
+                    width: 100,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Icon(Icons.error); // أيقونة خطأ إذا فشل التحميل
+                    },
+                  ),
               ),
               const SizedBox(height: 5),
               Expanded(

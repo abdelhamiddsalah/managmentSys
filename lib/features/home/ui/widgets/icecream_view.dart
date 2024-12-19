@@ -12,7 +12,7 @@ class IcecreamView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductsCubit()..fetchProducts('iceCreams'),
+      create: (context) => ProductsCubit()..fetchProducts('iceCreams', 'icecreams'),
       child: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
           if (state is ProductsLoading) {
