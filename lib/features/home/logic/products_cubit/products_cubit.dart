@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bloc/bloc.dart';
-import 'package:managerestaurent/features/home/logic/cubit/products_state.dart';
+import 'package:managerestaurent/features/home/logic/products_cubit/products_state.dart';
 import 'package:managerestaurent/features/home/models/product.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -14,7 +14,6 @@ class ProductsCubit extends Cubit<ProductsState> {
   Future<void> fetchProducts(String collectionName, String bucketName) async {
     try {
       emit(ProductsLoading());
-
       // جلب المنتجات من Firestore
       QuerySnapshot snapshot = await _firestore.collection(collectionName).get();
       List<Product> products = snapshot.docs
