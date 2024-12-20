@@ -26,7 +26,7 @@ class DetailsViewBody extends StatelessWidget {
                   child: Image.network(
                     product.imageUrl,
                     height: 130.h,
-                    width: double.infinity,
+                   width: 130.w,
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
@@ -39,8 +39,6 @@ class DetailsViewBody extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-
-              // الاسم والوصف
               Text(
                 product.name,
                 style: Styles.titleinloginpage,
@@ -56,7 +54,7 @@ class DetailsViewBody extends StatelessWidget {
                 children: [
                   Text(
                     '\$${product.price}',
-                    style: Styles.titleinloginpage.copyWith(color: Colors.green),
+                    style: Styles.titleinloginpage.copyWith(color: Colors.black),
                   ),
                   
                 ],
@@ -73,8 +71,6 @@ class DetailsViewBody extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-      
-              // معلومات إضافية
               Text(
                 'Additional Information',
                 style: Styles.titleinloginpage,
