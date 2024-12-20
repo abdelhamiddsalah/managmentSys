@@ -39,7 +39,7 @@ class DetailsViewBody extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-      
+
               // الاسم والوصف
               Text(
                 product.name,
@@ -51,8 +51,6 @@ class DetailsViewBody extends StatelessWidget {
                 style: Styles.discoverText,
               ),
               const SizedBox(height: 20),
-      
-              // السعر
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -64,8 +62,6 @@ class DetailsViewBody extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-      
-              // الوقت المتوقع للتوصيل
               Row(
                 children: [
                   const Icon(Icons.watch_later_outlined, size: 20),
