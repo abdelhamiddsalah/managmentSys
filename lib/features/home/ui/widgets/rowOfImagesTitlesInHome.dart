@@ -43,7 +43,6 @@ class RowOfImagesTitlesInHome extends StatelessWidget {
                   final isSelected = state == imageTypes[index];
                   return GestureDetector(
                     onTap: () => context.read<EnumsStateCubit>().changeNewsType(imageTypes[index]),
-                   
                     child: Material(
                       elevation: 5,
                       borderRadius: BorderRadius.circular(10),

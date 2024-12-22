@@ -1,5 +1,4 @@
 // ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:managerestaurent/features/cart/ui/widgets/cartViewBody.dart';
 
@@ -8,6 +7,6 @@ class Cartview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Cartviewbody();
+    return CartViewBody();
   }
 }

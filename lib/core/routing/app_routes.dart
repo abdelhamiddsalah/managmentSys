@@ -18,7 +18,7 @@ class AppRouting {
       case Routes.homeView:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => locator<CartCubit>(),
+            create: (context) => locator<CartCubit>(), // لا تحتاج إلى context هنا
             child: const CurvedNavbar(),
           ),
         );
@@ -41,12 +41,17 @@ class AppRouting {
       case Routes.details:
         final product = settings.arguments as Product; // استخراج البيانات
         return MaterialPageRoute(
-          builder: (_) =>
-              DetailsView(product: product), // تمرير البيانات إلى تفاصيل المنتج
+          builder: (_) => BlocProvider.value(
+            value: locator<CartCubit>(), // استخدم الـ Cubit من locator
+            child: DetailsView(product: product),
+          ),
         );
       case Routes.cart:
         return MaterialPageRoute(
-          builder: (_) => Cartview(), // تمرير البيانات إلى تفاصيل المنتج
+          builder: (_) => BlocProvider<CartCubit>(
+            create: (context) => locator<CartCubit>(), // استخدام CartCubit من locator
+            child: const Cartview(),
+          ),
         );
       default:
         return MaterialPageRoute(

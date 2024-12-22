@@ -7,12 +7,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:managerestaurent/main.dart';
+import 'package:hive/hive.dart';
+import 'package:managerestaurent/core/di/getIt.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
+import 'package:managerestaurent/myApp.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp(initialRoute: '/home',));
+    await tester.pumpWidget(MyApp(initialRoute: '/home', cartBox: locator<Box<Product>>(), ));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
