@@ -1,5 +1,4 @@
 // ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,7 +47,6 @@ class CartViewBody extends StatelessWidget {
   }
 }
 
-
 class CartItemRow extends StatelessWidget {
   final Product product;
 
@@ -57,49 +55,51 @@ class CartItemRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 6),
+      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 6.w),
       child: Material(
         elevation: 5.0,
         color: Colors.white,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Image.network(
-                product.imageUrl,
-                height: 40.h,
-                width: 40.w,
-                fit: BoxFit.cover,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(child: CircularProgressIndicator());
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  return const Icon(Icons.error, size: 30);
-                },
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(product.name, style: Styles.titleinloginpage),
-                  SizedBox(height: 15),
-                  Text(product.desc),
-                ],
-              ),
-              Column(
-                children: [
-                  Text('\$${product.price}', style: Styles.titleinloginpage),
-                  SizedBox(height: 15),
-                  IconButton(
-                    onPressed: () {
-                      context.read<CartCubit>().removeFromCart(product.id);
-                    },
-                    icon: Icon(Icons.delete),
-                  ),
-                ],
-              ),
-            ],
+          padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
+          child: Flexible(
+            child: Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Image.network(
+                  product.imageUrl,
+                  height: 40.h,
+                  width: 40.w,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return const Center(child: CircularProgressIndicator());
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.error, size: 30);
+                  },
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(product.name, style: Styles.titleinloginpage),
+                    SizedBox(height: 15.h),
+                    Text(product.desc),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text('\$${product.price}', style: Styles.titleinloginpage),
+                    SizedBox(height: 15.h),
+                    IconButton(
+                      onPressed: () {
+                        context.read<CartCubit>().removeFromCart(product.id);
+                      },
+                      icon: Icon(Icons.delete),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -116,7 +116,7 @@ class CartTotal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[200],
-      padding: const EdgeInsets.all(15),
+      padding: EdgeInsets.all(15.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
