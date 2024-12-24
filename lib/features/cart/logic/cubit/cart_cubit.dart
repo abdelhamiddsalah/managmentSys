@@ -36,5 +36,9 @@ class CartCubit extends Cubit<List<Product>> {
     emit([]);  // إرسال قائمة فارغة عند مسح السلة
   }
 
-  // لا تحتاج إلى إغلاق Cubit هنا لأن Flutter Bloc يدير ذلك بشكل صحيح.
+  @override
+ Future<void> close() {
+    _cartBox.close();
+    return super.close();
+  }
 }

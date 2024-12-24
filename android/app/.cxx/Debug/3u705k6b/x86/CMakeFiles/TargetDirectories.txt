@@ -1,0 +1,2 @@
+E:/firebasefood/managmentSys/android/app/.cxx/Debug/3u705k6b/x86/CMakeFiles/edit_cache.dir
+E:/firebasefood/managmentSys/android/app/.cxx/Debug/3u705k6b/x86/CMakeFiles/rebuild_cache.dir

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/features/authentication/logic/signupCubit/signup_cubit.dart';
 
@@ -33,10 +34,15 @@ class NameInHomeView extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.shopping_cart_outlined,
-                      color: Colors.white,
-                      semanticLabel: 'Shopping Cart',
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.cart);
+                      },
+                      child: const Icon(
+                        Icons.shopping_cart_outlined,
+                        color: Colors.white,
+                        semanticLabel: 'Shopping Cart',
+                      ),
                     ),
                   ],
                 ),
