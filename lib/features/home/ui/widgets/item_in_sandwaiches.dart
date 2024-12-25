@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/routing/routes.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
+import 'package:managerestaurent/core/widgets/showdialog.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:managerestaurent/features/home/models/product.dart';
 
@@ -83,6 +84,8 @@ class ItemInSandwaiches extends StatelessWidget {
                         IconButton(
                             onPressed: () {
                               context.read<CartCubit>().addToCart(product);
+                              showSuccessDialog(context);
+                            
                             },
                             icon: Icon(
                               Icons.shopping_bag,

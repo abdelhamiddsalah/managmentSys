@@ -5,6 +5,7 @@ import 'package:managerestaurent/features/home/logic/products_cubit/products_cub
 import 'package:managerestaurent/features/home/logic/products_cubit/products_state.dart';
 import 'package:managerestaurent/features/home/models/product.dart';
 import 'package:managerestaurent/features/home/ui/widgets/item_in_pizza_page.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PizzasView extends StatelessWidget {
   const PizzasView({super.key});
@@ -16,19 +17,19 @@ class PizzasView extends StatelessWidget {
       create: (context) => locator<ProductsCubit>()..fetchProducts('pizza', 'pizza'),
       child: BlocBuilder<ProductsCubit, ProductsState>(
         builder: (context, state) {
-          if (state is ProductsLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is ProductsLoaded) {
+          final isLoading = state is ProductsLoading;
+         if (state is ProductsLoaded) {
                final products = state.products;
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  ItemsInPizzasPage(products: products)
-                ],
-              ),
+                 if (products.isEmpty) {
+              return Skeletonizer(
+                enabled: isLoading,
+                child: const Center(child: Text('No products available.')),
+              );
+            }
+           return Skeletonizer(
+              enabled: isLoading,
+              child: ItemsInPizzasPage(products: products),
             );
-          } else if (state is ProductsError) {
-            return Center(child: Text(state.error));
           }
           return const Center(child: Text('Unexpected error occurred.'));
         },

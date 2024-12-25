@@ -1,9 +1,10 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:managerestaurent/features/cart/ui/widgets/cart_item_row.dart';
+import 'package:managerestaurent/features/cart/ui/widgets/cart_total.dart';
 import 'package:managerestaurent/features/home/models/product.dart';
 
 class CartViewBody extends StatelessWidget {
@@ -24,9 +25,7 @@ class CartViewBody extends StatelessWidget {
               child: Text('Your cart is empty', style: Styles.titleinloginpage),
             );
           }
-
           double total = cart.fold(0, (sum, product) => sum + product.price);
-
           return Column(
             children: [
               Expanded(
@@ -42,87 +41,6 @@ class CartViewBody extends StatelessWidget {
             ],
           );
         },
-      ),
-    );
-  }
-}
-
-class CartItemRow extends StatelessWidget {
-  final Product product;
-
-  const CartItemRow({super.key, required this.product});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 6.w),
-      child: Material(
-        elevation: 5.0,
-        color: Colors.white,
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
-          child: Flexible(
-            child: Row(
-                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.network(
-                  product.imageUrl,
-                  height: 40.h,
-                  width: 40.w,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return const Center(child: CircularProgressIndicator());
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Icon(Icons.error, size: 30);
-                  },
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(product.name, style: Styles.titleinloginpage),
-                    SizedBox(height: 15.h),
-                    Text(product.desc),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Text('\$${product.price}', style: Styles.titleinloginpage),
-                    SizedBox(height: 15.h),
-                    IconButton(
-                      onPressed: () {
-                        context.read<CartCubit>().removeFromCart(product.id);
-                      },
-                      icon: Icon(Icons.delete),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CartTotal extends StatelessWidget {
-  final double total;
-
-  const CartTotal({super.key, required this.total});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey[200],
-      padding: EdgeInsets.all(15.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text('Total:', style: Styles.titleinloginpage),
-          Text('\$${total.toStringAsFixed(2)}', style: Styles.titleinloginpage),
-        ],
       ),
     );
   }

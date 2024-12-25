@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
+import 'package:managerestaurent/core/widgets/showdialog.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
 import 'package:managerestaurent/features/home/models/product.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ItemInIcePage extends StatelessWidget {
   final Product product;
@@ -81,6 +83,7 @@ class ItemInIcePage extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       context.read<CartCubit>().addToCart(product);
+                     showSuccessDialog(context);
                     },
                     icon: Icon(
                       Icons.shopping_bag,

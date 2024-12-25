@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
 import 'package:managerestaurent/features/wallet/logic/stripe_function.dart';
-import 'package:managerestaurent/features/wallet/ui/widgets/wallet_add_options.dart';
 import 'package:managerestaurent/features/wallet/ui/widgets/wallet_card.dart';
 import 'package:managerestaurent/features/wallet/ui/widgets/wallet_header.dart';
 
@@ -23,7 +22,7 @@ class WalletViewBody extends StatelessWidget {
             SizedBox(height: 30),
             WalletCard(),
             SizedBox(height: 20),
-            WalletAddOptions(),
+           // WalletAddOptions(),
             SizedBox(height: 40),
             _AddMoneyButton(),
           ],
@@ -52,7 +51,7 @@ class _AddMoneyButton extends StatelessWidget {
         },
         child: Center(
           child: Text(
-            'Add Money',
+            'Pay Now',
             style: Styles.titleinforget,
           ),
         ),
