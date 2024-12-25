@@ -33,8 +33,6 @@ class RowOfImagesTitlesInHome extends StatelessWidget {
       create: (context) => EnumsStateCubit(),
       child: BlocBuilder<EnumsStateCubit, ImageEnums>(
         builder: (context, state) {
-          final currentIndex = imageTypes.indexOf(state);
-
           return Column(
             children: [
               Row(
@@ -42,7 +40,9 @@ class RowOfImagesTitlesInHome extends StatelessWidget {
                 children: List.generate(images.length, (index) {
                   final isSelected = state == imageTypes[index];
                   return GestureDetector(
-                    onTap: () => context.read<EnumsStateCubit>().changeNewsType(imageTypes[index]),
+                    onTap: () => context
+                        .read<EnumsStateCubit>()
+                        .changeNewsType(imageTypes[index]),
                     child: Material(
                       elevation: 5,
                       borderRadius: BorderRadius.circular(10),
@@ -64,14 +64,22 @@ class RowOfImagesTitlesInHome extends StatelessWidget {
                 }),
               ),
               const SizedBox(height: 20),
-              IndexedStack(
-                index: currentIndex,
-                children: const [
-                  IcecreamView(), // عرض البيانات للـ Icecream
-                  SandwachiesView(), // عرض البيانات للـ Burger
-                  PizzasView(), // عرض البيانات للـ Pizza
-                  SaladsView(), // عرض البيانات للـ Salad
-                ],
+              // استخدام Offstage بدلاً من Visibility
+              Offstage(
+                offstage: state != ImageEnums.icecream,
+                child: const IcecreamView(),
+              ),
+              Offstage(
+                offstage: state != ImageEnums.burger,
+                child: const SandwachiesView(),
+              ),
+              Offstage(
+                offstage: state != ImageEnums.pizza,
+                child: const PizzasView(),
+              ),
+              Offstage(
+                offstage: state != ImageEnums.salad,
+                child: const SaladsView(),
               ),
             ],
           );

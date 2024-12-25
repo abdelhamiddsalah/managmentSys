@@ -29,57 +29,51 @@ class NameInHomeView extends StatelessWidget {
                 'Hello, $userName',
                 style: Styles.nameInHomeViewText,
               ),
-              Container(
-                 // padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
+              BlocBuilder<CartCubit, List<Product>>(
+                builder: (context, state) {
+                   final cartItemsCount = state.isNotEmpty ? state.length : 0;
+                  return IconButton(
+                   
+                    icon: Stack(
+                      children: [
+                       const Icon(
+                    Icons.shopping_cart_outlined,
                     color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
+                    semanticLabel: 'Shopping Cart',
                   ),
-                  child: BlocBuilder<CartCubit, List<Product>>(
-                    builder: (context, state) {
-                       final cartItemsCount = state.isNotEmpty ? state.length : 0;
-                      return IconButton(
-                       
-                        icon: Stack(
-                          children: [
-                           const Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.white,
-                        semanticLabel: 'Shopping Cart',
-                      ),
-                            if (cartItemsCount > 0)
-                              Positioned(
-                                right: -3,
-                                top: -2,
-                                child: Container(
-                                  padding: const EdgeInsets.all(2),
-                                  decoration: BoxDecoration(
-                                    color: Colors.orange,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  constraints: BoxConstraints(
-                                    minWidth: 18..w,
-                                    minHeight: 18.h,
-                                  ),
-                                  child: Text(
-                                    '$cartItemsCount',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
+                        if (cartItemsCount > 0)
+                          Positioned(
+                            right: -3,
+                            top: -2,
+                            child: Container(
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.orange,
+                                shape: BoxShape.circle,
                               ),
-                          ],
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.cart);
-                        },
-                      );
+                              constraints: BoxConstraints(
+                                minWidth: 18..w,
+                                minHeight: 18.h,
+                              ),
+                              child: Text(
+                                '$cartItemsCount',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.cart);
                     },
-                  )),
+                  );
+                },
+              ),
             ],
           );
         },

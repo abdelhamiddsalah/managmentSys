@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:managerestaurent/features/home/logic/cubit/enums_state_cubit.dart';
 import 'package:managerestaurent/features/home/logic/products_cubit/products_cubit.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -23,4 +24,6 @@ void setupLocator() {
 
   // تسجيل ProductsCubit
   locator.registerFactory<ProductsCubit>(() => ProductsCubit());
+
+  locator.registerLazySingleton<EnumsStateCubit>(() => EnumsStateCubit());
 }
