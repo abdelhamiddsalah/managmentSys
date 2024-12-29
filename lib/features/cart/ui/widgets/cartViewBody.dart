@@ -25,7 +25,7 @@ class CartViewBody extends StatelessWidget {
               child: Text('Your cart is empty', style: Styles.titleinloginpage),
             );
           }
-          double total = cart.fold(0, (sum, product) => sum + product.price);
+          final total = context.read<CartCubit>().getTotal(); // استخدام الدالة لحساب الإجمالي
           return Column(
             children: [
               Expanded(
@@ -37,7 +37,7 @@ class CartViewBody extends StatelessWidget {
                   },
                 ),
               ),
-              CartTotal(total: total),
+              CartTotal(total: total), // تمرير الإجمالي إلى الـ Widget
             ],
           );
         },

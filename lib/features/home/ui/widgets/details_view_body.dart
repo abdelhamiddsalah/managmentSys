@@ -20,9 +20,10 @@ class DetailsViewBody extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+          padding:  EdgeInsets.symmetric(vertical: 80.h, horizontal: 20.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: Hero(
@@ -88,21 +89,24 @@ class DetailsViewBody extends StatelessWidget {
 
                       return Row(
                         children: [
-                          IconButton(
-                            onPressed: () {
-                              if (itemCount > 0) {
-                                context.read<CartCubit>().removeFromCart(product.id);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('${product.name} removed from cart'),
-                                    duration: const Duration(seconds: 2),
-                                  ),
-                                );
-                              }
-                            },
-                            icon: const Icon(Icons.minimize),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: IconButton(
+                              onPressed: () {
+                                if (itemCount > 0) {
+                                  context.read<CartCubit>().removeFromCart(product.id);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('${product.name} removed from cart'),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                }
+                              },
+                              icon: const Icon(Icons.minimize),
+                            ),
                           ),
-                          Text(itemCount.toString()),
+                          Text(itemCount.toString(),style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.bold),),
                           IconButton(
                             onPressed: () {
                               context.read<CartCubit>().addToCart(product);

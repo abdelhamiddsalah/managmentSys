@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:managerestaurent/core/di/getIt.dart';
 import 'package:managerestaurent/core/theming/styles.dart';
+import 'package:managerestaurent/features/cart/logic/cubit/cart_cubit.dart';
+import 'package:managerestaurent/features/home/models/product.dart';
 
 class WalletCard extends StatelessWidget {
   const WalletCard({super.key});
@@ -21,12 +25,19 @@ class WalletCard extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           const SizedBox(width: 40),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Your Wallet', style: Styles.discoverText),
-              Text('\$ 100', style: Styles.titleinloginpage),
-            ],
+          BlocProvider(
+            create: (context) => locator<CartCubit>(),
+            child: BlocBuilder<CartCubit, List<Product>>(
+              builder: (context, state) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Total', style: Styles.discoverText),
+                    Text('\$${context.read<CartCubit>().getTotal().toStringAsFixed(2)}', style: Styles.titleinloginpage),
+                  ],
+                );
+              },
+            ),
           ),
         ],
       ),

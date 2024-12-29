@@ -36,8 +36,13 @@ class CartCubit extends Cubit<List<Product>> {
     emit([]);  // إرسال قائمة فارغة عند مسح السلة
   }
 
+  double getTotal() {
+    // حساب الإجمالي بناءً على المنتجات في السلة
+    return state.fold(0, (sum, product) => sum + product.price);
+  }
+
   @override
- Future<void> close() {
+  Future<void> close() {
     _cartBox.close();
     return super.close();
   }

@@ -18,7 +18,7 @@ class WalletViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: const [
-            WalletHeader(),
+       //     WalletHeader(),
             SizedBox(height: 30),
             WalletCard(),
             SizedBox(height: 20),
